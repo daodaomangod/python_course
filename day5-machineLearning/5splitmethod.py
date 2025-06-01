@@ -25,6 +25,7 @@ x, y = make_classification(
 #
 # # 自动生成图例
 # label = ['A', 'B', 'C']
+#替换图例
 # legend = plt.legend(scatter.legend_elements()[0],
 #                     label)
 # plt.xlabel('Feature 1')
@@ -52,9 +53,9 @@ acc =accuracy_score(y_test,y_pred_test)
 
 
 print(f'测试结果：准确率={acc}')
-# print(classification_report(y_test,y_pred_test)) #分类报告
+print(classification_report(y_test,y_pred_test)) #分类报告
 
-# 混淆矩阵
+# 混淆矩阵 常用于分类判定
 cm=confusion_matrix(y_test,y_pred_test)
 print(cm)
 # 两种都可以展示
