@@ -17,7 +17,7 @@ from sklearn.ensemble import BaggingRegressor
 
 # 1 读取数据
 
-df = pd.read_csv('boston.csv')
+df = pd.read_csv('data_advertising.csv')
 
 print(df.head(5))
 
@@ -36,7 +36,7 @@ print(cor)
 # plt.show()
 # 排序
 # 负相关变量
-print(cor['MEDV'].sort_values())
+print(cor['sales'].sort_values())
 # plt.subplot(131)
 # plt.scatter(df['LSTAT'], df['MEDV'])
 # plt.xlabel("LSTAT")
@@ -51,7 +51,7 @@ print(cor['MEDV'].sort_values())
 # 3.  数据处理
 
 
-data_df = df[['LSTAT', 'RM', 'PIRATIO', 'INDUS', 'TAX', 'NOX', 'ZN', 'MEDV']]
+data_df = df[['TV','radio','newspaper','sales']]
 
 print(type(data_df))
 #  pandas.core.frame.DataFrame转换数据
@@ -59,9 +59,9 @@ print(type(data_df))
 # x=np.array(data_df.iloc[:2])
 
 # 去除一列
-x = np.array(data_df.drop('MEDV', axis=1))
+x = np.array(data_df.drop('sales', axis=1))
 
-y = np.array(data_df['MEDV'])
+y = np.array(data_df['sales'])
 
 # 4 划分测试数据
 
@@ -80,37 +80,37 @@ x_train_poly = trans.fit_transform(x_train)
 x_test_poly = trans.fit_transform(x_test)
 x_all = trans.fit_transform(x)
 '''
-训练集mse_train[0:30]=3.76,r2_train=0.956
-测试集MSE_test=22.94,R2_test=0.724
-所有集mse_all=9.52,r2_all=0.887'''
-# model = LinearRegression()  #创建一个线性模型
+训练集mse_train[0:30]=0.13,r2_train=0.995
+测试集MSE_test=0.56,R2_test=0.980
+所有集mse_all=0.25,r2_all=0.991'''
+#model = LinearRegression()  #创建一个线性模型
 '''
 KNN回归模型
-训练集mse_train[0:30]=16.63,r2_train=0.804
-测试集MSE_test=30.16,R2_test=0.638
-所有集mse_all=20.69,r2_all=0.755'''
-# model = KNeighborsRegressor()
+训练集mse_train[0:30]=3.36,r2_train=0.874
+测试集MSE_test=4.13,R2_test=0.849
+所有集mse_all=3.59,r2_all=0.867'''
+#model = KNeighborsRegressor()
 '''
 随机森林
-训练集mse_train[0:30]=1.35,r2_train=0.984
-测试集MSE_test=20.98,R2_test=0.748
-所有集mse_all=7.25,r2_all=0.914'''
-# model=RandomForestRegressor()
+训练集mse_train[0:30]=0.04,r2_train=0.998
+测试集MSE_test=0.33,R2_test=0.988
+所有集mse_all=0.13,r2_all=0.995'''
+#model=RandomForestRegressor()
 
 '''
 梯度提升回归模型
-训练集mse_train[0:30]=1.21,r2_train=0.986
-测试集MSE_test=21.73,R2_test=0.739
-所有集mse_all=7.37,r2_all=0.913'''
-# model = GradientBoostingRegressor()
+训练集mse_train[0:30]=0.01,r2_train=1.000
+测试集MSE_test=0.21,R2_test=0.992
+所有集mse_all=0.07,r2_all=0.997'''
+model = GradientBoostingRegressor()
 
 '''
 Bagging回归模型
-训练集mse_train[0:30]=2.18,r2_train=0.974
-测试集MSE_test=21.64,R2_test=0.740
-所有集mse_all=8.03,r2_all=0.905
+训练集mse_train[0:30]=0.07,r2_train=0.997
+测试集MSE_test=0.35,R2_test=0.987
+所有集mse_all=0.15,r2_all=0.994
 '''
-model = BaggingRegressor()
+#model = BaggingRegressor()
 
 # 6 训练
 model.fit(x_train_poly, y_train)
@@ -145,8 +145,8 @@ print(f'所有集mse_all={mse_all:.2f},r2_all={r2_all:.3f}')
 
 plt.scatter(range(len(y_test)), y_test, label='True')
 plt.scatter(range(len(y_pred)), y_pred, c='r', label="Predict")
-plt.xlabel('Number')
-plt.ylabel('MEDV')
+plt.xlabel('Advertising')
+plt.ylabel('sales')
 plt.legend()
 
 plt.show()

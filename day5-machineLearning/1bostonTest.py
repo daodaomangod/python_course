@@ -17,7 +17,7 @@ from sklearn.ensemble import BaggingRegressor
 
 # 1 读取数据
 
-df = pd.read_csv('boston.csv')
+df = pd.read_csv('data_advertising.csv')
 
 print(df.head(5))
 
