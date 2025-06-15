@@ -13,7 +13,7 @@ img = cv.imread('Image/Lena.png')
 target = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
 # 模板
-template = cv.imread('Image/temp_Lena_1.png', 0)
+template = cv.imread('Image/temp_Lena_2.png', 0)
 
 # 创建一个sift特征检测器
 sift = cv.SIFT_create()
@@ -28,14 +28,25 @@ kp2, des3 = sift.detectAndCompute(template, None)
 bf = cv.BFMatcher(cv.NORM_L2)
 
 # 匹配
-match = bf.match(des3, des1)
+# match = bf.match(des3, des1)
+match = bf.knnMatch(des3, des1, k=2)
+print(len(match))
+good_match = []
+
+for m, n in match:
+    if m.distance / n.distance < 0.7:
+        good_match.append(m)
+
+
+print(len(good_match))
 
 # 可视化
-result = cv.drawMatches(template, kp2, target, kp1, match, None,flags=2)
+# result = cv.drawMatches(template, kp2, target, kp1, match, None, flags=2)
+result = cv.drawMatches(template, kp2, img, kp1, good_match, None, flags=2)
 
 # 显示
 
-cv.imshow('img', img)
-cv.imshow('SIFT', result)
+cv.imshow('img', result)
+# cv.imshow('SIFT', result)
 cv.waitKey()
 cv.destroyAllWindows()
