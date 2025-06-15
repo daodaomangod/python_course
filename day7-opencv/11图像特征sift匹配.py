@@ -31,7 +31,7 @@ bf = cv.BFMatcher(cv.NORM_L2)
 match = bf.match(des3, des1)
 
 # 可视化
-result = cv.drawMatches(template, kp2, target, kp1, match, None)
+result = cv.drawMatches(template, kp2, target, kp1, match, None,flags=2)
 
 # 显示
 
