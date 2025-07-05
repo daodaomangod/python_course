@@ -16,11 +16,8 @@ def extract_frame(video_path, frame_times):
             print('视频帧提取不成功')
     print('视频帧提取完成')
     return video_frames
-
-
 video_path = 'video_test.mp4'
-frame_times = [1, 10, 20, 30]
-
+frame_times = [1, 10, 15,20, 30]
 frames = extract_frame(video_path, frame_times)
 
 # 2.亮度分析
