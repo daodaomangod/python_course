@@ -1,0 +1,16 @@
+# 定义数据集路径和数据标签
+#path: datasets                    # dataset root dir
+train: datasets/images/train     # train images path
+val: datasets/images/val         # val images path
+#test: ***                       # test images (optional)
+
+# Classes
+names: ['drone']      #  类别标签
+
+
+
+
+
+
+
+
